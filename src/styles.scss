@@ -1,1 +1,77 @@
-/* You can add global styles to this file, and also import other style files */
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+$app-primary: (
+  50 : #f0eaef,
+  100 : #daccd8,
+  200 : #c2aabe,
+  300 : #aa87a3,
+  400 : #976e90,
+  500 : rgba(55,47,110,1),
+  600 : #7d4d74,
+  700 : #724369,
+  800 : #683a5f,
+  900 : #55294c,
+  A100 : #ff9eea,
+  A200 : #ff6bdf,
+  A400 : #ff38d4,
+  A700 : #ff1fcf,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #ffffff,
+  )
+);
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$immotracker-primary: mat.define-palette($app-primary);
+$immotracker-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$immotracker-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$immotracker-theme: mat.define-dark-theme((
+  color: (
+    primary: $immotracker-primary,
+    accent: $immotracker-accent,
+    warn: $immotracker-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($immotracker-theme);
+
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-app-background {
+  background: linear-gradient(90deg, rgba(55,47,110,1) 0%, rgba(12,18,27,1) 100%) !important;
+}

@@ -1,0 +1,36 @@
+<div style="padding: 24px 24px; box-sizing: border-box; width: 300px; height: 100%">
+  <form [formGroup]="options" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%">
+  <div>
+    <h1>Optionen</h1>
+      <mat-form-field style="width: 100%">
+        <mat-label>Ort</mat-label>
+        <mat-select formControlName="place">
+          <mat-option [value]="'Bern'">Bern</mat-option>
+        </mat-select>
+        <mat-icon matPrefix>location_on</mat-icon>
+      </mat-form-field>
+      <span class="section-title">Wohnungsgrösse</span>
+      <div style="display: flex; max-width: 275px; gap: 8px; align-items: center">
+        <mat-form-field style="width: 50%">
+          <mat-label>Fläche</mat-label>
+          <input type="number" matInput formControlName="areaFrom"/>
+          <span matTextSuffix>m<sup>2</sup></span>
+        </mat-form-field>
+        <span style="margin-bottom: 24px">bis</span>
+        <mat-form-field style="width: 50%">
+          <mat-label>Fläche</mat-label>
+          <input type="number" matInput formControlName="areaTo"/>
+          <span matTextSuffix>m<sup>2</sup></span>
+        </mat-form-field>
+      </div>
+
+      <span class="section-title">Anzahl Zimmer</span>
+
+      <mat-chip-listbox multiple="true" formControlName="selectedRoomCount">
+        <mat-chip-option *ngFor="let roomCount of roomOptions" [value]="roomCount" [selected]="selectedRoomCount.indexOf(roomCount) !== -1">{{roomCount}}</mat-chip-option>
+      </mat-chip-listbox>
+  </div>
+    <button style="width: 100%; margin-top: 24px; border-radius: 48px" mat-flat-button color="primary" [disabled]="!options.valid" (click)="setFilter.emit()">Filter anwenden</button>
+  </form>
+</div>
+

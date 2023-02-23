@@ -1,0 +1,83 @@
+$mobile-break-point: 900px;
+
+::ng-deep .ngx-charts {
+  text {
+    fill: #fff;
+  }
+
+  .gridline-path {
+    stroke: rgba(255, 255, 255, 0.1) !important;
+  }
+}
+
+.container {
+  padding: 32px;
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  gap: 16px;
+  position: relative;
+
+  @media (max-width: $mobile-break-point) {
+    flex-direction: column;
+  }
+}
+
+.charts-container {
+  width: calc(100% - 64px);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  @media (max-width: $mobile-break-point) {
+    width: calc(100% + 24px);
+    height: calc(100% + 64px);
+    margin-left: -38px;
+    margin-bottom: -38px;
+  }
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.09);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(11.6px);
+  -webkit-backdrop-filter: blur(11.6px);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+}
+
+.options {
+  @media (max-width: $mobile-break-point) {
+    position: absolute;
+    height: calc(100% - 64px);
+    width: calc(100% - 64px);
+
+    ::ng-deep app-options div {
+      width: unset !important;
+    }
+  }
+}
+
+.options-open-mobile {
+  @media (max-width: $mobile-break-point) {
+    display: block;
+  }
+}
+
+.options-closed-mobile {
+  @media (max-width: $mobile-break-point) {
+    display: none;
+  }
+}
+
+.controls-mobile {
+  display: none;
+  @media (max-width: $mobile-break-point) {
+    display: flex;
+    justify-content: center;
+  }
+  padding: 24px;
+}

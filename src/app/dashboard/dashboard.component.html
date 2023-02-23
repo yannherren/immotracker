@@ -1,0 +1,44 @@
+<div class="container">
+  <mat-card class="card" style="flex-grow: 1">
+    <div class="charts-container">
+      <ngx-charts-line-chart
+        style="margin-bottom: -64px;"
+        [scheme]="$any(colorScheme)"
+        [results]="data"
+        [timeline]="true"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        [xAxis]="true"
+        [yAxis]="true"
+        [autoScale]="true"
+        [xAxisLabel]="screenWidth > 900 ? 'Zeit' : ''"
+        [yAxisLabel]="screenWidth > 900 ? 'Preis in CHF' : ''"
+        [yAxisTickFormatting]="formatPrice"
+        [xAxisTickFormatting]="formatDate"
+      >
+        <ng-template #tooltipTemplate let-model="model">
+          Zu diesem Zeitpunkt kostet eine <b>{{model.series}} Zimmer</b> Immobilie
+          <br>durchschnittlich <b>{{model.value}}</b> CHF
+        </ng-template>
+
+        <ng-template #seriesTooltipTemplate let-model="model">
+          <div *ngFor="let dataPoint of model">
+            <span>{{dataPoint.series}} Zimmer durchschnittlich {{dataPoint.value}} CHF</span>
+          </div>
+        </ng-template>
+      </ngx-charts-line-chart>
+    </div>
+  </mat-card>
+  <mat-card class="card options" [class.options-open-mobile]="optionsOpenMobile" [class.options-closed-mobile]="!optionsOpenMobile">
+      <app-options
+        style="height: 100%"
+        [options]="options"
+        [roomOptions]="roomOptions"
+        (setFilter)="loadData(); optionsOpenMobile = false"
+      ></app-options>
+  </mat-card>
+  <div class="controls-mobile card" *ngIf="!optionsOpenMobile">
+    <button mat-flat-button color="primary" (click)="optionsOpenMobile = true">Optionen öffnen</button>
+  </div>
+</div>
+
