@@ -8,6 +8,10 @@ $mobile-break-point: 900px;
   .gridline-path {
     stroke: rgba(255, 255, 255, 0.1) !important;
   }
+
+  .line-highlight {
+    display: block !important;
+  }
 }
 
 .container {

@@ -15,6 +15,7 @@
         [yAxisLabel]="screenWidth > 900 ? 'Preis in CHF' : ''"
         [yAxisTickFormatting]="formatPrice"
         [xAxisTickFormatting]="formatDate"
+        [gradient]="true"
       >
         <ng-template #tooltipTemplate let-model="model">
           Zu diesem Zeitpunkt kostet eine <b>{{model.series}} Zimmer</b> Immobilie
