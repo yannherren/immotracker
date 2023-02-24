@@ -7,3 +7,16 @@
     height: 100%;
   }
 }
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 12px;
+  font-weight: lighter;
+  font-size: 12px;
+
+  @media (max-width: 900px) {
+    display: none !important;
+  }
+}

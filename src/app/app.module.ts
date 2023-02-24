@@ -7,7 +7,7 @@ import {SupabaseClient} from "@supabase/supabase-js";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatToolbarModule} from "@angular/material/toolbar";
-import {LineChartModule} from "@swimlane/ngx-charts";
+import {LineChartModule, NumberCardModule} from "@swimlane/ngx-charts";
 import {MatCardModule} from "@angular/material/card";
 import { OptionsComponent } from './options/options.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -25,22 +25,23 @@ import {MatButtonModule} from "@angular/material/button";
     DashboardComponent,
     OptionsComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    LineChartModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatIconModule,
-    MatChipsModule,
-    MatListModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        LineChartModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        MatIconModule,
+        MatChipsModule,
+        MatListModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        NumberCardModule,
+    ],
   providers: [{provide: SupabaseClient, useValue: {}}, {provide: SELECTION_LIST, useValue: {}}],
   bootstrap: [AppComponent]
 })

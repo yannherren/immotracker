@@ -2,6 +2,14 @@
 <mat-toolbar color="primary">
   Immotracker
   <span style="font-weight: lighter; font-size: 12px; margin-left: 16px; opacity: 0.6">{{version}}</span>
+  <span style="flex-grow: 1"></span>
+  <div class="status" style="display: flex; align-items: center; gap: 8px; margin-left: 12px">
+    <span class="blinking-icon"></span>
+    <span>Daten aktuell</span>
+  </div>
+<!--  <button mat-icon-button>-->
+<!--    <mat-icon>info</mat-icon>-->
+<!--  </button>-->
 </mat-toolbar>
 <router-outlet></router-outlet>
 </div>

@@ -75,3 +75,22 @@ body {
 .mat-app-background {
   background: linear-gradient(90deg, rgba(55,47,110,1) 0%, rgba(12,18,27,1) 100%) !important;
 }
+
+
+.blinking-icon {
+  display: block;
+  height: 12px;
+  width: 12px;
+  content: '';
+  background-color: green;
+  border-radius: 50%;
+  animation-name: blinking-animation;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes blinking-animation {
+  0% {opacity: 0.2; transform: scale(0.7)}
+  50% {opacity: 1; ; transform: scale(0.8)}
+  100% {opacity: 0.2; transform: scale(0.7)}
+}

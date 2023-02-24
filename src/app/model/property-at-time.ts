@@ -12,4 +12,5 @@ export interface PropertyAtTime {
   rooms: number;
   average_price: number;
   data_timestamp: string;
+  property_count: number;
 }

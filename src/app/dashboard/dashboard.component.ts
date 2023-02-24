@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, HostListener, OnInit} from '@angular/core';
 import {PropertyPriceService} from "../services/property-price.service";
 import {PropertyAtTime} from "../model/property-at-time";
 import {toArray} from "rxjs";
@@ -45,7 +45,12 @@ export class DashboardComponent implements OnInit {
 
   optionsOpenMobile = false;
 
-  constructor(private readonly propertyPriceService: PropertyPriceService, private readonly fb: FormBuilder) {
+  additionalStatistics: {
+    name: string,
+    value: any
+  }[] = [];
+
+  constructor(private readonly propertyPriceService: PropertyPriceService, private readonly fb: FormBuilder, private readonly cdr: ChangeDetectorRef) {
   }
 
   async ngOnInit() {
@@ -54,6 +59,7 @@ export class DashboardComponent implements OnInit {
   }
 
   async loadData() {
+    this.additionalStatistics = [];
     const propertyAndPrices = await this.propertyPriceService.readAllPropertyAndPrices(
       this.options.value.selectedRoomCount as number[],
       this.options.value.place as string,
@@ -73,6 +79,26 @@ export class DashboardComponent implements OnInit {
         dataByRooms.set(currentRoomSize, [propertyAtTime])
       }
     })
+
+    const counts: number[] = []
+    const prices: number[] = []
+    dataByRooms.forEach((value, key) => {
+      const latestDate = moment.max(value.map(it => moment(it.data_timestamp))).format('YYYY-MM-DD')
+      const propertiesToday = value.filter(it => it.data_timestamp === latestDate)
+      counts.push(propertiesToday[0].property_count)
+      prices.push(...propertiesToday.map(it => it.average_price))
+    })
+
+    this.additionalStatistics = [
+      {
+        name: 'Anzahl Immobilien heute',
+        value: counts.reduce((a, b) => a + b, 0)
+      },
+      {
+        name: 'Durchschnittspreis heute in CHF',
+        value: Math.round(prices.reduce((a, b) => a + b, 0)  / prices.length)
+      }
+    ]
 
     dataByRooms.forEach((value, key) => {
       this.data?.push({
