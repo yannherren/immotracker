@@ -28,8 +28,8 @@ $mobile-break-point: 900px;
 }
 
 .charts-container {
-  width: calc(100% - 64px);
-  height: 100%;
+  width: 100%;
+  height: calc(100% + 64px);
   display: flex;
   align-items: center;
   @media (max-width: $mobile-break-point) {

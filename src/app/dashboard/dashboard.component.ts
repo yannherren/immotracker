@@ -5,6 +5,7 @@ import {toArray} from "rxjs";
 import {FormBuilder, Validators} from "@angular/forms";
 import {DatePipe} from "@angular/common";
 import * as moment from "moment";
+import {LegendPosition} from "@swimlane/ngx-charts";
 
 @Component({
   selector: 'app-dashboard',
@@ -12,6 +13,7 @@ import * as moment from "moment";
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  LegendPosition = LegendPosition
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {

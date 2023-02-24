@@ -14,7 +14,7 @@
     <mat-card class="card" style="flex-grow: 1">
       <div class="charts-container">
         <ngx-charts-line-chart
-          style="margin-bottom: -64px;"
+          style="margin-bottom: -96px;"
           [scheme]="$any(colorScheme)"
           [results]="data"
           [timeline]="true"
@@ -28,6 +28,8 @@
           [yAxisTickFormatting]="formatPrice"
           [xAxisTickFormatting]="formatDate"
           [gradient]="true"
+          [legend]="true"
+          [legendTitle]="'Zimmer'"
         >
           <ng-template #tooltipTemplate let-model="model">
             Zu diesem Zeitpunkt kostet eine <b>{{model.series}} Zimmer</b> Immobilie
