@@ -29,4 +29,23 @@ export class PropertyPriceService {
     const result = await this.supabase.rpc('get_room_sizes')
     return result.data.map((it: any) => it.rooms) as number[];
   }
+
+  async getPropertiesByRooms(sizes: number[], place = 'bern', areaFrom = 0, areaTo = 500): Promise<Map<number, PropertyAtTime[]>> {
+    const propertyAndPrices = await this.readAllPropertyAndPrices(
+      sizes, place, areaFrom, areaTo
+    );
+
+    const dataByRooms = new Map<number, PropertyAtTime[]>;
+
+    propertyAndPrices.forEach(propertyAtTime => {
+      const currentRoomSize = propertyAtTime.rooms
+      if (dataByRooms.has(currentRoomSize)) {
+        dataByRooms.get(currentRoomSize)?.push(propertyAtTime)
+      } else {
+        dataByRooms.set(currentRoomSize, [propertyAtTime])
+      }
+    })
+
+    return dataByRooms;
+  }
 }

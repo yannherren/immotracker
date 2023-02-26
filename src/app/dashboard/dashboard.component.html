@@ -30,29 +30,33 @@
           [gradient]="true"
           [legend]="true"
           [legendTitle]="'Zimmer'"
+          [curve]="curveInterpolation"
         >
           <ng-template #tooltipTemplate let-model="model">
             Zu diesem Zeitpunkt kostet eine <b>{{model.series}} Zimmer</b> Immobilie
-            <br>durchschnittlich <b>{{model.value}}</b> CHF
+            <br>durchschnittlich <b>{{Math.round(model.value)}}</b> CHF
           </ng-template>
 
           <ng-template #seriesTooltipTemplate let-model="model">
             <div *ngFor="let dataPoint of model">
-              <span>{{dataPoint.series}} Zimmer durchschnittlich {{dataPoint.value}} CHF</span>
+              <span>{{dataPoint.series}} Zimmer durchschnittlich {{Math.round(dataPoint.value)}} CHF</span>
             </div>
           </ng-template>
         </ngx-charts-line-chart>
       </div>
     </mat-card>
-    <mat-card class="card" >
-      <div style="width: 100%; justify-content: center; align-items: center; margin-right: -12px; margin-bottom: -12px">
-
+    <div style="width: 100%">
+      <mat-card class="card">
+        <div
+          style="width: 100%; justify-content: center; align-items: center; margin-right: -12px; margin-bottom: -12px">
           <ngx-charts-number-card
             [cardColor]="'#372f6e'"
             [results]="additionalStatistics"
           ></ngx-charts-number-card>
-      </div>
-    </mat-card>
+        </div>
+      </mat-card>
+    </div>
+
   </div>
 
 

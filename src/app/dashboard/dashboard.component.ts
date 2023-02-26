@@ -6,6 +6,8 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {DatePipe} from "@angular/common";
 import * as moment from "moment";
 import {LegendPosition} from "@swimlane/ngx-charts";
+import {PredictionService} from "../services/prediction.service";
+import {curveMonotoneX} from "d3-shape";
 
 @Component({
   selector: 'app-dashboard',
@@ -14,6 +16,7 @@ import {LegendPosition} from "@swimlane/ngx-charts";
 })
 export class DashboardComponent implements OnInit {
   LegendPosition = LegendPosition
+  Math = Math
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
@@ -22,11 +25,15 @@ export class DashboardComponent implements OnInit {
 
   screenWidth!: number;
 
+  curveInterpolation = curveMonotoneX;
+
   options = this.fb.group({
     place: [{value: 'Bern', disabled: true}, Validators.required],
     areaFrom: [null],
     areaTo: [null],
     selectedRoomCount: [[2, 2.5], Validators.required],
+    predictionsEnabled: [false],
+    predictionDayCount: [2]
   });
 
   data?: [
@@ -52,7 +59,10 @@ export class DashboardComponent implements OnInit {
     value: any
   }[] = [];
 
-  constructor(private readonly propertyPriceService: PropertyPriceService, private readonly fb: FormBuilder, private readonly cdr: ChangeDetectorRef) {
+  constructor(private readonly propertyPriceService: PropertyPriceService,
+              private readonly fb: FormBuilder,
+              private readonly predictionService: PredictionService
+              ) {
   }
 
   async ngOnInit() {
@@ -61,26 +71,15 @@ export class DashboardComponent implements OnInit {
   }
 
   async loadData() {
-    this.additionalStatistics = [];
-    const propertyAndPrices = await this.propertyPriceService.readAllPropertyAndPrices(
+    const dataByRooms = await this.propertyPriceService.getPropertiesByRooms(
       this.options.value.selectedRoomCount as number[],
       this.options.value.place as string,
       this.options.value.areaFrom ? this.options.value.areaFrom : 0,
       this.options.value.areaTo ? this.options.value.areaTo : 1000,
     );
 
+    this.additionalStatistics = [];
     this.data = [] as any;
-
-    const dataByRooms = new Map<number, PropertyAtTime[]>;
-
-    propertyAndPrices.forEach(propertyAtTime => {
-      const currentRoomSize = propertyAtTime.rooms
-      if (dataByRooms.has(currentRoomSize)) {
-        dataByRooms.get(currentRoomSize)?.push(propertyAtTime)
-      } else {
-        dataByRooms.set(currentRoomSize, [propertyAtTime])
-      }
-    })
 
     const counts: number[] = []
     const prices: number[] = []
@@ -109,6 +108,38 @@ export class DashboardComponent implements OnInit {
           return {
             name: it.data_timestamp,
             value: it.average_price
+          }
+        })
+      })
+    })
+
+    if (this.options.value.predictionsEnabled) {
+      const days = this.options.value.predictionDayCount
+      this.createPrediction(dataByRooms, days as number);
+    }
+
+  }
+
+  createPrediction(dataByRooms: Map<number, PropertyAtTime[]>, days: number) {
+    dataByRooms.forEach((value, rooms) => {
+      const prices = value.map(prop => prop.average_price);
+      const dates = value.map(prop => prop.data_timestamp);
+      const latestPrice = prices[prices.length - 1]
+      const latestDate = dates[prices.length - 1]
+      let predictedPrices = this.predictionService.predictPrices(prices, dates, days)
+      predictedPrices.unshift({
+        price: latestPrice,
+        date: latestDate,
+      })
+
+      predictedPrices = predictedPrices.sort((a, b) => moment(a.date).valueOf() > moment(b.date).valueOf() ? 1 : -1)
+
+      this.data?.push({
+        name: 'Vorhersage: ' + rooms,
+        series: predictedPrices.map(it => {
+          return {
+            name: it.date,
+            value: it.price
           }
         })
       })

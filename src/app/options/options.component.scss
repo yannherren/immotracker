@@ -1,3 +1,5 @@
+$mobile-break-point: 900px;
+
 .section-title {
   text-transform: uppercase;
   opacity: 0.5;
@@ -5,4 +7,16 @@
   font-size: 12px;
   margin-bottom: 8px;
   display: block;
+}
+
+
+.container {
+  padding: 24px 24px;
+  box-sizing: border-box;
+  width: 300px;
+  height: 100%;
+
+  @media (max-width: $mobile-break-point) {
+    width: 100%;
+  }
 }

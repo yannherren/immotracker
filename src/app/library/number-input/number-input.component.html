@@ -1,0 +1,9 @@
+<div style="display: flex; align-items: center">
+  <button mat-icon-button (click)="remove()" [disabled]="!canSubtract">
+    <mat-icon>do_not_disturb_on</mat-icon>
+  </button>
+  <span>{{control.value}}</span>
+  <button mat-icon-button (click)="add()">
+    <mat-icon>add_circle</mat-icon>
+  </button>
+</div>

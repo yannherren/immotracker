@@ -66,10 +66,6 @@ $mobile-break-point: 900px;
     position: absolute;
     height: calc(100% - 64px);
     width: calc(100% - 64px);
-
-    ::ng-deep app-options div {
-      width: unset !important;
-    }
   }
 }
 

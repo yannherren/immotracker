@@ -1,7 +1,8 @@
-<div style="padding: 24px 24px; box-sizing: border-box; width: 300px; height: 100%">
-  <form [formGroup]="options" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%">
-  <div>
-    <h1>Optionen</h1>
+<div class="container">
+  <form [formGroup]="options"
+        style="display: flex; flex-direction: column; justify-content: space-between; height: 100%">
+    <div>
+      <h1>Optionen</h1>
       <mat-form-field style="width: 100%">
         <mat-label>Ort</mat-label>
         <mat-select formControlName="place">
@@ -24,13 +25,29 @@
         </mat-form-field>
       </div>
 
+      <span class="section-title" style="display: flex; align-items: center; gap: 16px">
+        Vorhersage
+        <mat-icon style="opacity: 0.5" matTooltip="Sagt die Preise anhand einer linearen Regression voraus. Es gibt keine Garantie auf Richtigkeit!">info</mat-icon>
+      </span>
+      <div style="margin-bottom: 8px; display: flex; align-items: center; gap: 32px">
+        <mat-slide-toggle formControlName="predictionsEnabled" color="primary"></mat-slide-toggle>
+        <div style="display: flex; align-items: center;">
+          <span style="opacity: 0.7">Tage:</span>
+          <app-number-input [numberFormGroup]="options" numberFormControlName="predictionDayCount"></app-number-input>
+        </div>
+      </div>
+
+
       <span class="section-title">Anzahl Zimmer</span>
 
       <mat-chip-listbox multiple="true" formControlName="selectedRoomCount">
-        <mat-chip-option *ngFor="let roomCount of roomOptions" [value]="roomCount" [selected]="selectedRoomCount.indexOf(roomCount) !== -1">{{roomCount}}</mat-chip-option>
+        <mat-chip-option *ngFor="let roomCount of roomOptions" [value]="roomCount"
+                         [selected]="selectedRoomCount.indexOf(roomCount) !== -1">{{roomCount}}</mat-chip-option>
       </mat-chip-listbox>
-  </div>
-    <button style="width: 100%; margin-top: 24px; border-radius: 48px" mat-flat-button color="primary" [disabled]="!options.valid" (click)="setFilter.emit()">Filter anwenden</button>
+    </div>
+    <button style="width: 100%; margin-top: 24px; border-radius: 48px" mat-flat-button color="primary"
+            [disabled]="!options.valid" (click)="setFilter.emit()">Filter anwenden
+    </button>
   </form>
 </div>
 

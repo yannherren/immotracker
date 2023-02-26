@@ -18,30 +18,36 @@ import {MatChipsModule} from "@angular/material/chips";
 import {MatListModule, MatSelectionList, SELECTION_LIST, SelectionList} from "@angular/material/list";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import { NumberInputComponent } from './library/number-input/number-input.component';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    OptionsComponent
+    OptionsComponent,
+    NumberInputComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatToolbarModule,
-        LineChartModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatSelectModule,
-        MatIconModule,
-        MatChipsModule,
-        MatListModule,
-        ReactiveFormsModule,
-        MatButtonModule,
-        NumberCardModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    LineChartModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatIconModule,
+    MatChipsModule,
+    MatListModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    NumberCardModule,
+    MatSlideToggleModule,
+    MatTooltipModule,
+  ],
   providers: [{provide: SupabaseClient, useValue: {}}, {provide: SELECTION_LIST, useValue: {}}],
   bootstrap: [AppComponent]
 })
