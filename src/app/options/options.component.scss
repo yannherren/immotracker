@@ -21,10 +21,19 @@ $mobile-break-point: 900px;
   }
 }
 
-::ng-deep .mdc-list-item__primary-text {
-  color: white !important;
-}
+::ng-deep  {
+  .mdc-list-item__primary-text {
+    color: white !important;
+  }
 
-::ng-deep .mat-pseudo-checkbox::after {
-  color: white;
+  .mat-pseudo-checkbox::after {
+    color: white;
+  }
+  .mat-calendar-body-selected {
+    border: 1px solid white;
+  }
+
+  .mat-calendar-body-in-range::before {
+    background: rgba(55, 47, 110, 0.65);
+  }
 }

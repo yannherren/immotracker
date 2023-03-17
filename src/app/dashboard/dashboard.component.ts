@@ -25,7 +25,7 @@ export class DashboardComponent implements OnInit {
 
   screenWidth!: number;
 
-  startDate = moment().subtract(20, 'd').toDate();
+  startDate = moment().subtract(30, 'd').toDate();
 
   curveInterpolation = curveMonotoneX;
 
