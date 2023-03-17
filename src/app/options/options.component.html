@@ -3,6 +3,15 @@
         style="display: flex; flex-direction: column; justify-content: space-between; height: 100%">
     <div>
       <h1>Optionen</h1>
+      <mat-form-field appearance="fill" style="width: 100%">
+        <mat-label>Daten zwischen</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate formControlName="startDate" placeholder="Start date">
+          <input matEndDate formControlName="endDate" placeholder="End date">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
       <mat-form-field style="width: 100%">
         <mat-label>Ort</mat-label>
         <mat-select formControlName="place">
@@ -27,7 +36,7 @@
 
       <span class="section-title" style="display: flex; align-items: center; gap: 16px">
         Vorhersage
-        <mat-icon style="opacity: 0.5" matTooltip="Sagt die Preise anhand einer linearen Regression voraus. Es gibt keine Garantie auf Richtigkeit!">info</mat-icon>
+        <mat-icon style="opacity: 0.5" matTooltipTouchGestures="on" matTooltip="Sagt die Preise anhand einer linearen Regression voraus. Es gibt keine Garantie auf Richtigkeit!">info</mat-icon>
       </span>
       <div style="margin-bottom: 8px; display: flex; align-items: center; gap: 32px">
         <mat-slide-toggle formControlName="predictionsEnabled" color="primary"></mat-slide-toggle>
@@ -39,13 +48,15 @@
 
 
       <span class="section-title">Anzahl Zimmer</span>
+      <mat-form-field style="width: 100%" color="primary">
+        <mat-select multiple="true" formControlName="selectedRoomCount">
+          <mat-option *ngFor="let roomCount of roomOptions" [value]="roomCount"
+          >{{roomCount}}</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-      <mat-chip-listbox multiple="true" formControlName="selectedRoomCount">
-        <mat-chip-option *ngFor="let roomCount of roomOptions" [value]="roomCount"
-                         [selected]="selectedRoomCount.indexOf(roomCount) !== -1">{{roomCount}}</mat-chip-option>
-      </mat-chip-listbox>
     </div>
-    <button style="width: 100%; margin-top: 24px; border-radius: 48px" mat-flat-button color="primary"
+    <button style="width: 100%; border: 1px solid rgba(255,255,255,0.7); border-radius: 12px" mat-flat-button color="primary"
             [disabled]="!options.valid" (click)="setFilter.emit()">Filter anwenden
     </button>
   </form>

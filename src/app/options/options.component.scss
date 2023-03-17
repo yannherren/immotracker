@@ -20,3 +20,11 @@ $mobile-break-point: 900px;
     width: 100%;
   }
 }
+
+::ng-deep .mdc-list-item__primary-text {
+  color: white !important;
+}
+
+::ng-deep .mat-pseudo-checkbox::after {
+  color: white;
+}

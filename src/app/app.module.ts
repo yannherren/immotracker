@@ -21,6 +21,8 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import { NumberInputComponent } from './library/number-input/number-input.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
 
 @NgModule({
   declarations: [
@@ -29,26 +31,28 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     OptionsComponent,
     NumberInputComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    LineChartModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatIconModule,
-    MatChipsModule,
-    MatListModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    NumberCardModule,
-    MatSlideToggleModule,
-    MatTooltipModule,
-  ],
-  providers: [{provide: SupabaseClient, useValue: {}}, {provide: SELECTION_LIST, useValue: {}}],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        LineChartModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        MatIconModule,
+        MatChipsModule,
+        MatListModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        NumberCardModule,
+        MatSlideToggleModule,
+        MatTooltipModule,
+        MatDatepickerModule,
+      MatNativeDateModule
+    ],
+  providers: [{provide: SupabaseClient, useValue: {}}, {provide: SELECTION_LIST, useValue: {}}, { provide: MAT_DATE_LOCALE, useValue: 'de-CH' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

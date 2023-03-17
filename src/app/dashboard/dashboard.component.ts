@@ -25,12 +25,16 @@ export class DashboardComponent implements OnInit {
 
   screenWidth!: number;
 
+  startDate = moment().subtract(20, 'd').toDate();
+
   curveInterpolation = curveMonotoneX;
 
   options = this.fb.group({
     place: [{value: 'Bern', disabled: true}, Validators.required],
     areaFrom: [null],
     areaTo: [null],
+    startDate: [this.startDate],
+    endDate: [new Date()],
     selectedRoomCount: [[2, 2.5], Validators.required],
     predictionsEnabled: [false],
     predictionDayCount: [2]
@@ -74,6 +78,8 @@ export class DashboardComponent implements OnInit {
     const dataByRooms = await this.propertyPriceService.getPropertiesByRooms(
       this.options.value.selectedRoomCount as number[],
       this.options.value.place as string,
+      this.options.value.startDate as Date,
+      this.options.value.endDate as Date,
       this.options.value.areaFrom ? this.options.value.areaFrom : 0,
       this.options.value.areaTo ? this.options.value.areaTo : 1000,
     );
