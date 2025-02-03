@@ -8,12 +8,17 @@
   }
 }
 
+.toolbar {
+  background-color: #0A1029;
+  padding: 32px;
+}
+
 .status {
   display: flex;
   align-items: center;
   gap: 8px;
   margin-left: 12px;
-  font-weight: lighter;
+  font-weight: normal;
   font-size: 12px;
 
   @media (max-width: 900px) {

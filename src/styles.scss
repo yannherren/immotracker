@@ -15,7 +15,7 @@ $app-primary: (
   200 : #c2aabe,
   300 : #aa87a3,
   400 : #976e90,
-  500 : rgba(55,47,110,1),
+  500 : #2e429f,
   600 : #7d4d74,
   700 : #724369,
   800 : #683a5f,
@@ -73,7 +73,7 @@ body {
 }
 
 .mat-app-background {
-  background: linear-gradient(90deg, rgba(55,47,110,1) 0%, rgba(12,18,27,1) 100%) !important;
+  background: #0A1029;
 }
 
 
