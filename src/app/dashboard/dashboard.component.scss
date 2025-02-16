@@ -61,6 +61,38 @@ $mobile-break-point: 900px;
   border: 1px solid rgba(255, 255, 255, 0.11);
 }
 
+.additional-statistics {
+  display: flex;
+  width: 100%;
+  gap: 16px;
+  padding: 16px;
+  box-sizing: border-box;
+
+  @media (max-width: $mobile-break-point) {
+    flex-wrap: wrap;
+  }
+
+  .statistic-card {
+    background-color: #0A1029;
+    padding: 16px 32px;
+    border-radius: 8px;
+    width: 100%;
+    border-bottom: 8px #59405C solid;
+
+    .value {
+      font-weight: bold;
+      font-size: 48px;
+      line-height: 48px;
+      margin-bottom: 8px;
+
+      @media (max-width: $mobile-break-point) {
+        font-size: 24px;
+        line-height: 24px;
+      }
+    }
+  }
+}
+
 .options {
   @media (max-width: $mobile-break-point) {
     position: absolute;

@@ -102,8 +102,8 @@ export class DashboardComponent implements OnInit {
         value: counts.reduce((a, b) => a + b, 0)
       },
       {
-        name: 'Durchschnittspreis heute in CHF',
-        value: Math.round(prices.reduce((a, b) => a + b, 0)  / prices.length)
+        name: 'Durchschnittspreis heute',
+        value: "CHF " + Math.round(prices.reduce((a, b) => a + b, 0)  / prices.length) + ".-"
       }
     ]
 

@@ -48,11 +48,13 @@
     <div style="width: 100%">
       <mat-card class="card">
         <div
-          style="width: 100%; justify-content: center; align-items: center; margin-right: -12px; margin-bottom: -12px">
-          <ngx-charts-number-card
-            [cardColor]="'#0A1029'"
-            [results]="additionalStatistics"
-          ></ngx-charts-number-card>
+          style="width: 100%; justify-content: center; align-items: center;">
+          <div class="additional-statistics">
+            <div class="statistic-card" *ngFor="let stat of additionalStatistics">
+              <div class="value">{{stat.value}}</div>
+              <div class="title">{{stat.name}}</div>
+            </div>
+          </div>
         </div>
       </mat-card>
     </div>
